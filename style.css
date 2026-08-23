@@ -1,0 +1,386 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --primary-gradient: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Canvas за 3D фона */
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Навигация */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #a855f7;
+}
+
+/* Секция Hero */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 10%;
+    max-width: 1200px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero h1 span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    background: var(--primary-gradient);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(168, 85, 247, 0.6);
+}
+
+/* Секция Портфолио */
+.section {
+    padding: 5rem 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Glassmorphism Карти за Проекти */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(168, 85, 247, 0.5);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Футър */
+footer {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--card-border);
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .nav-links { display: none; }
+}
+.project-video {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.section1 {
+    padding: 5rem 10%;
+    max-width: 1400px;
+    margin: 1.2rem auto;
+}
+
+.section1-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.grid1 {
+    display: grid1;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.card1 {
+    background: var(--card1-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card1:hover {
+    transform: translateY(-10px);
+    border-color: rgba(168, 85, 247, 0.5);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.card1 p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+<!--Инстаграм-->
+.social-icons a {  
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.social-icons .snimka1 {
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+}
+
+.snimka1 {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 100px;
+    display: block;
+}
+.section1 {
+    padding: 5rem 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section1-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+#social {
+    position: relative;
+}
+
+#social h3 {
+    position: absolute;
+    top: 290px;
+    left: 127px;
+}
+
+#social2 .snimka1 {
+    position: absolute;
+    top: 60px;
+    left: 300px;
+    width: 500px;
+}
+<!--Фейсбук-->
+.social-icons1 a {  
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.social-icons1 .snimka2 {
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+}
+
+.snimka2 {
+    width: 101px;
+    height: 101px;
+    object-fit: cover;
+    border-radius: 100px;
+    display: block;
+}
+.section2 {
+    padding: 5rem 10%;
+    max-width: 1400px;
+    margin: -80px auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+#social2 {
+    position: relative;
+}
+
+#social2 h3 {
+    position: absolute;
+    top: 5px;
+    left: 295px;
+}
+
+#social2 .snimka2 {
+    position: absolute;
+    top: -100px;
+    left: 290px;
+    width: 100px;
+}
+<!--ТикТок-->
+.social-icons2 a {  
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.social-icons2 .snimka3 {
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+}
+
+.snimka3 {
+    width: 101px;
+    height: 101px;
+    object-fit: cover;
+    border-radius: 100px;
+    display: block;
+}
+.section3{
+    padding: 5rem 10%;
+    max-width: 1400px;
+    margin: -80px auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+#social3 {
+    position: relative;
+}
+
+#social3 h3 {
+    position: absolute;
+    top: -75px;
+    left: 470px;
+}
+
+#social3 .snimka3 {
+    position: absolute;
+    top: -180px;
+    left: 450px;
+    width: 100px;
+}

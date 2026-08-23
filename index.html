@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моето Модерно Портфолио</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Външен CSS файл -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Three.js (За 3D графиката) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP (За анимациите) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+    <!-- 3D Canvas за Three.js -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="logo">IvchoDEV.</div>
+        <ul class="nav-links">
+            <li><a href="#about">За мен</a></li>
+            <li><a href="#projects">Проекти</a></li>
+            <li><a href="#social">Контакт</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Секция -->
+    <section class="hero" id="about">
+        <h1 class="hero-title">Здравей, аз съм <br><span>Ивайло Христов</span></h1>
+        <p class="hero-subtitle">Креативен специалист, създаващ интерактивни и дигитални изживявания от бъдещето.Занимавам се със видео обработка.</p>
+        <a href="#projects" class="btn">Виж Проектите</a>
+    </section>
+
+    <!--Секция социални мрежи-->
+    <section class="section1" id="social">
+        <h2 class="section1-title">Свържи се с мен</h2>
+                <h3>Instagram</h3>
+                <div class="social-icons">
+    <a href="https://www.instagram.com/ivchoss/" target="_blank" rel="noopener noreferrer">
+        <img src="logo/insta.jpg" alt="Instagram" class="snimka1">
+    </a>
+</div>
+            </div>
+        </div>
+    </section>
+    <section class="section2" id="social2">
+                <h3>Facebook</h3>
+                <div class="social-icons">
+                    <div class="social-icons1"></div>
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+        <img src="logo/face.png" alt="Facebook" class="snimka2">
+    </a>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+    <!--ТикТок-->
+<section class="section3" id="social3">
+    <h3>TikTok</h3>
+    <div class="social-icons2"></div>
+    <a href="https://www.tiktok.com/@bgscripting" target="_blank" rel="noopener noreferrer">
+        <img src="logo/tik tok.jpg" alt="TikTok" class="snimka3">
+    </a>
+</section>
+
+    <!-- Секция Проекти -->
+    <section class="section" id="projects">
+        <h2 class="section-title">Избрани Проекти</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Проект 01</h3>
+                <p>Описание на първия проект. Стилизиран сайт за фризьорски салон.</p>
+                <video class="project-video" controls>
+    <source src="logo/Desktop 2026.07.10 - 00.30.16.01.mp4" type="video/mp4">
+</video>
+            </div>
+            <div class="card">
+                <h3>Проект 02</h3>
+                <p>Описание на втория проект. Стилизиран сайт за пица.</p>
+                <video class="project-video" controls>
+                    <source src="logo/snaptik_7661739213729058070_v3.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card">
+                <h3>Проект 03</h3>
+                <p>Онлайн магазин за моторна техника.</p>
+                <video class="project-video" controls>
+                    <source src="logo/scriptvideo.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футър -->
+    <footer id="contact">
+        <p>© 2026 IvchoDEV. Всички права запазени.</p>
+    </footer>
+
+    <!-- Скрипт за 3D Ефекти и Анимации -->
+    <script>
+        // --- 1. THREE.JS 3D СЦЕНА ---
+        const canvas = document.querySelector('#webgl-canvas');
+        const scene = new THREE.Scene();
+        
+        // Камера
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+
+        // Рендерер
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // 3D Геометрия (Тор)
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshNormalMaterial({
+            wireframe: true
+        });
+        const torus = new THREE.Mesh(geometry, material);
+        torus.position.set(15, 0, 0); // Изместен вдясно
+        scene.add(torus);
+
+        // Светлина
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        // Интеракция с мишката за 3D обекта
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = -(event.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        // Анимационен цикъл
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Въртене на обекта
+            torus.rotation.x += 0.005;
+            torus.rotation.y += 0.006;
+
+            // Плавно плаване спрямо мишката
+            torus.rotation.x += mouseY * 0.01;
+            torus.rotation.y += mouseX * 0.01;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Преоразмеряване на прозореца
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- 2. GSAP ВХОДНИ АНИМАЦИИ ---
+        gsap.from('.hero-title', { opacity: 0, y: 50, duration: 1.2, delay: 0.2 });
+        gsap.from('.hero-subtitle', { opacity: 0, y: 30, duration: 1.2, delay: 0.5 });
+        gsap.from('.btn', { opacity: 0, scale: 0.8, duration: 1, delay: 0.8 });
+        gsap.from('.card', { opacity: 0, y: 40, duration: 1, stagger: 0.2, delay: 1 });
+    </script>
+</body>
+</html>
